@@ -1,10 +1,13 @@
-package tn.iit.storemanagement.models;
+package tn.iit.storemanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -21,14 +24,20 @@ public class Medicament implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
+    @NotEmpty
+    @Size(min = 3)
     private String name;
 
+    @NotNull
     private float dosage;
 
     private float price;
+    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date expiredDate;
 
+    @NotNull
     @ManyToOne
     private Category category;
 
