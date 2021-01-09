@@ -13,10 +13,10 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryDto {
+public class CategorieDto {
     private long id;
     @NotNull
     @NotEmpty
-    @Size(min = 3)
-    private String name;
+    @Size(min =2)
+    private String nom;
 }

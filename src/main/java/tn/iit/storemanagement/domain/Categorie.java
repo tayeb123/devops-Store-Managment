@@ -19,7 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Category implements Serializable {
+public class Categorie implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
@@ -28,10 +28,10 @@ public class Category implements Serializable {
 
     @NotNull
     @NotEmpty
-    @Size(min = 3)
+    @Size(min = 4)
     private String name;
 
-    public Category(String name){
+    public Categorie(String name){
         this.name=name;
     }
 }

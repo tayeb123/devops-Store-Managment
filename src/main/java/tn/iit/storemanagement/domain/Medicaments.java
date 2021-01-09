@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Medicament implements Serializable {
+public class Medicaments implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
@@ -27,25 +27,20 @@ public class Medicament implements Serializable {
     @NotNull
     @NotEmpty
     @Size(min = 3)
-    private String name;
-
-    @NotNull
-    private float dosage;
-
-    private float price;
+    private String nom;
+    private float prix;
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private Date expiredDate;
+    private Date dateExpiration;
 
     @NotNull
     @ManyToOne
-    private Category category;
+    private Categorie categorie;
 
-    public Medicament(String name, float dosage, float price, Date expiredDate, Category category) {
-        this.name = name;
-        this.dosage = dosage;
-        this.price = price;
-        this.expiredDate = expiredDate;
-        this.category = category;
+    public Medicaments(String nom, float prix, Date dateExpiration, Categorie categorie) {
+        this.nom = nom;
+        this.prix = prix;
+        this.dateExpiration = dateExpiration;
+        this.categorie = categorie;
     }
 }

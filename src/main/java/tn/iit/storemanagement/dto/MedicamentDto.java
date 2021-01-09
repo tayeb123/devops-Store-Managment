@@ -1,7 +1,6 @@
 package tn.iit.storemanagement.dto;
 
 import lombok.*;
-import tn.iit.storemanagement.domain.Category;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,16 +16,14 @@ public class MedicamentDto {
     @NotNull
     @NotEmpty
     @Size(min = 3)
-    private String name;
+    private String nom;
     @NotNull
-    private float dosage;
+    private float prix;
     @NotNull
-    private float price;
+    private Date dateExpiration;
     @NotNull
-    private Date expiredDate;
-    @NotNull
-    private long categoryId;
+    private long categotieId;
     @NotNull
     @Size(min = 3)
-    private String categoryName;
+    private String categorieNom;
 }

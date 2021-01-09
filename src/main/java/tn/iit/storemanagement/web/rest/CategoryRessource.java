@@ -2,16 +2,12 @@ package tn.iit.storemanagement.web.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tn.iit.storemanagement.dto.CategoryDto;
-import tn.iit.storemanagement.domain.Category;
-import tn.iit.storemanagement.factory.CategoryFactory;
+import tn.iit.storemanagement.dto.CategorieDto;
 import tn.iit.storemanagement.services.CategoryService;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 
 @CrossOrigin("*")
 @RequestMapping(value = "/api/categories")
@@ -26,27 +22,27 @@ public class CategoryRessource {
     }
 
     @GetMapping("{id}")
-    public CategoryDto findOne(@PathVariable("id") long id) {
+    public CategorieDto findOne(@PathVariable("id") long id) {
         this.logger.debug ("Getting Category {}",id);
         return this.categoryService.findOne (id);
     }
 
     @GetMapping
-    public Collection<CategoryDto> findAll(){
+    public Collection<CategorieDto> findAll(){
         this.logger.debug ("Getting all categories");
         return this.categoryService.findAll ();
     }
 
     @PostMapping
-    public CategoryDto add(@Valid @RequestBody CategoryDto categoryDto){
-        this.logger.debug ("Adding new Category {}",categoryDto.getName ());
-        return this.categoryService.save (categoryDto);
+    public CategorieDto add(@Valid @RequestBody CategorieDto categorieDto){
+        this.logger.debug ("Adding new Category {}", categorieDto.getNom());
+        return this.categoryService.save (categorieDto);
     }
 
     @PutMapping
-    public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto){
-        this.logger.debug ("Updating Category {} with {}",categoryDto.getId (),categoryDto.getName ());
-        return this.categoryService.save (categoryDto);
+    public CategorieDto update(@Valid @RequestBody CategorieDto categorieDto){
+        this.logger.debug ("Updating Category {} with {}", categorieDto.getId (), categorieDto.getNom());
+        return this.categoryService.save (categorieDto);
     }
 
     @DeleteMapping("{id}")
