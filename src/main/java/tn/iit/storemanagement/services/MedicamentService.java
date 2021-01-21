@@ -10,6 +10,7 @@ import tn.iit.storemanagement.web.rest.errors.ResourceNotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -37,5 +38,8 @@ public class MedicamentService {
     }
     public Collection<MedicamentDto> findAll(){
         return MedicamentMapper.medicamentsToMedicamentDtos (this.medicamentDao.findAll ());
+    }
+    public Collection<MedicamentDto> findAllByIds(List<Long> ids){
+        return MedicamentMapper.medicamentsToMedicamentDtos (this.medicamentDao.findAllById (ids));
     }
 }

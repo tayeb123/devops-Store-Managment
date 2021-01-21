@@ -9,6 +9,7 @@ import tn.iit.storemanagement.services.MedicamentService;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 
 @CrossOrigin("*")
 @RequestMapping(value = "/api/medicaments")
@@ -51,5 +52,10 @@ public class MedicamentRessource {
     public void delete(@PathVariable("id") long id) {
         this.logger.debug ("Deleting Medicament {}", id);
         this.medicamentService.deleteById (id);
+    }
+    @PostMapping("/searches")
+    public Collection<MedicamentDto> searches(@Valid @RequestBody List<Long> ids){
+        this.logger.debug ("Getting all medicaments with ids {}",ids);
+        return this.medicamentService.findAllByIds(ids);
     }
 }
