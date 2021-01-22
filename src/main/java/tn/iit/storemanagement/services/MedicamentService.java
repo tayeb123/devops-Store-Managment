@@ -1,6 +1,7 @@
 package tn.iit.storemanagement.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import tn.iit.storemanagement.dao.MedicamentDao;
 import tn.iit.storemanagement.domain.Medicaments;
@@ -36,7 +37,7 @@ public class MedicamentService {
             throw new ResourceNotFoundException ("Medicament with id " + id + " not found");
         return MedicamentMapper.medicamentToMedicamentDto (medicament.get ());
     }
-    public Collection<MedicamentDto> findAll(){
+    public Collection<MedicamentDto> findAll(PageRequest of){
         return MedicamentMapper.medicamentsToMedicamentDtos (this.medicamentDao.findAll ());
     }
     public Collection<MedicamentDto> findAllByIds(List<Long> ids){

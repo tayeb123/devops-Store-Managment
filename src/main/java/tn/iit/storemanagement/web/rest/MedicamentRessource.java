@@ -3,6 +3,8 @@ package tn.iit.storemanagement.web.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import tn.iit.storemanagement.dto.MedicamentDto;
 import tn.iit.storemanagement.services.MedicamentService;
@@ -18,7 +20,7 @@ public class MedicamentRessource {
 
     private final Logger logger = LoggerFactory.getLogger (MedicamentRessource.class);
     private final MedicamentService medicamentService;
-
+    @Autowired
     public MedicamentRessource(MedicamentService medicamentService) {
         this.medicamentService = medicamentService;
     }
@@ -29,11 +31,22 @@ public class MedicamentRessource {
         return this.medicamentService.findOne (id);
     }
 
-    @GetMapping()
+    /*@GetMapping()
     public Collection<MedicamentDto> findAll() {
         this.logger.debug ("Getting all medicaments");
         return this.medicamentService.findAll ();
+    }*/
+
+    @GetMapping()
+    public Collection<MedicamentDto> findAll(
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "3") int pageSize,
+            @RequestParam(defaultValue = "id") String pageSort
+    ) {
+        this.logger.debug("GettingMedicament {}" );
+        return this.medicamentService.findAll (PageRequest.of(pageNo,pageSize, Sort.by (pageSort).ascending ()));
     }
+
 
     @PostMapping
     public MedicamentDto add(@Valid @RequestBody MedicamentDto medicamentDto) {
@@ -54,8 +67,8 @@ public class MedicamentRessource {
         this.medicamentService.deleteById (id);
     }
     @PostMapping("/searches")
-    public Collection<MedicamentDto> searches(@Valid @RequestBody List<Long> ids){
-        this.logger.debug ("Getting all medicaments with ids {}",ids);
-        return this.medicamentService.findAllByIds(ids);
+    public Collection<MedicamentDto> searches(@Valid @RequestBody List<Long> allByIds){
+        this.logger.debug ("Getting all medicaments with allByIds {}",allByIds);
+        return this.medicamentService.findAllByIds(allByIds);
     }
 }
